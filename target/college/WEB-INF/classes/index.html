@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+
+    <title>index</title>
+</head>
+<body>
+<script type="text/javascript">
+    function check1(){
+        if(document.getElementById('id1').value==0){
+            alert('分数必填!');
+            document.getElementById('id1').focus();
+            return false;
+        }
+    }
+    function check2(){
+        if(document.getElementById('id2').value==0){
+            alert('位次必填!');
+            document.getElementById('id2').focus();
+            return false;
+        }
+    }
+</script>
+
+
+<div class="container">
+    <h2 class="text-center" style="margin-top: 50px;">高考志愿填报服务小平台</h2>
+    <br>
+    <!-- Nav pills -->
+    <ul class="nav nav-pills justify-content-center" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="pill" href="#grade">分数选大学</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disabled invisible" data-toggle="pill" href="#">间隔</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="pill" href="#rank">位次选大学</a>
+        </li>
+    </ul>
+
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div id="grade" class="container tab-pane active text-center"><br>
+            <div class="container mt-3" style="max-height: 100px;">
+                <form>
+                    <p class="custom-control-inline">生源：</p>
+                    <select name="cars" class="custom-select-sm" style="width: 100px;">
+                        <option selected>北京</option>
+                        <option value="Runoob">天津</option>
+                        <option value="Taobao">河北</option>
+                        <option value="Taobao">山西</option>
+                        <option value="Taobao">内蒙古</option>
+                        <option value="Taobao">辽宁</option>
+                        <option value="Taobao">吉林</option>
+                        <option value="Taobao">黑龙江</option>
+                        <option value="Taobao">上海</option>
+                        <option value="Google">浙江</option>
+                        <option value="Runoob">江苏</option>
+                        <option value="Taobao">安徽</option>
+                        <option value="Taobao">福建</option>
+                        <option value="Taobao">江西</option>
+                        <option value="Taobao">山东</option>
+                        <option value="Taobao">河南</option>
+                        <option value="Taobao">湖北</option>
+                        <option value="Taobao">湖南</option>
+                        <option value="Google">广东</option>
+                        <option value="Runoob">广西</option>
+                        <option value="Taobao">海南</option>
+                        <option value="Taobao">重庆</option>
+                        <option value="Taobao">四川</option>
+                        <option value="Taobao">贵州</option>
+                        <option value="Taobao">云南</option>
+                        <option value="Taobao">西藏</option>
+                        <option value="Taobao">陕西</option>
+                        <option value="Taobao">甘肃</option>
+                        <option value="Taobao">青海</option>
+                        <option value="Google">宁夏</option>
+                        <option value="Runoob">新疆</option>
+                        <option value="Taobao">台湾</option>
+                        <option value="Taobao">香港</option>
+                        <option value="Taobao">澳门</option>
+
+                    </select>
+                </form>
+            </div>
+
+
+            <ul class="nav nav-pills justify-content-center" role="tablist" style="padding-left: 20px; margin-top: 30px;">
+                <p style="margin-top: 10px;margin-left: 20px;">科类：</p>
+
+                <li class="nav-item" style="margin-left: 20px">
+                    <a class="nav-link active" data-toggle="pill" href="#">文科</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="pill" href="#">理科</a>
+                </li>
+            </ul>
+
+
+
+
+            <div class="container" style="padding-left: 140px; margin-top: 30px;">
+                <form>
+                    <div class="form-group">
+                        <p class="custom-control-inline" style="margin-left: 5px">考分：</p>
+                        <input id="id1" type="text" onkeyup="this.value=this.value.replace(/\D/g,'')" placeholder="请输入考分">
+                    </div>
+                </form>
+            </div>
+
+
+            <div class="container text-center">
+                <button type="button" class="btn btn-primary" style="margin-top: 30px;" onclick="check1()">选大学</button>
+            </div>
+
+            <div class="container" style="margin-top: 30px;font-size: smaller;" >
+                <a href="#" class="text-info" data-toggle="modal" data-target="#myModal">推荐规则</a>
+            </div>
+            <!-- 模态框 -->
+            <div class="modal fade" id="myModal">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+
+                        <!-- 模态框头部 -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">推荐规则</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <!-- 模态框主体 -->
+                        <div class="modal-body">
+                            <p>1、本查询系统的信息仅供参考，具体数据请以学校官网或考试院公布为准。</p>
+                            <p>2、考生输入分数，系统将根据在当省招生的高校招生情况，推荐合适的高校；</p>
+                            <p>3、本系统推荐的院校名单，仅供志愿参考。</p>
+                        </div>
+
+                        <!-- 模态框底部 -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+
+
+        <div id="rank" class="container tab-pane text-center"><br>
+            <div class="container mt-3" style="max-height: 100px;">
+                <form>
+                    <p class="custom-control-inline">生源：</p>
+                    <select name="cars" class="custom-select-sm" style="width: 100px;">
+                        <option selected>北京</option>
+                        <option value="Runoob">天津</option>
+                        <option value="Taobao">河北</option>
+                        <option value="Taobao">山西</option>
+                        <option value="Taobao">内蒙古</option>
+                        <option value="Taobao">辽宁</option>
+                        <option value="Taobao">吉林</option>
+                        <option value="Taobao">黑龙江</option>
+                        <option value="Taobao">上海</option>
+                        <option value="Google">浙江</option>
+                        <option value="Runoob">江苏</option>
+                        <option value="Taobao">安徽</option>
+                        <option value="Taobao">福建</option>
+                        <option value="Taobao">江西</option>
+                        <option value="Taobao">山东</option>
+                        <option value="Taobao">河南</option>
+                        <option value="Taobao">湖北</option>
+                        <option value="Taobao">湖南</option>
+                        <option value="Google">广东</option>
+                        <option value="Runoob">广西</option>
+                        <option value="Taobao">海南</option>
+                        <option value="Taobao">重庆</option>
+                        <option value="Taobao">四川</option>
+                        <option value="Taobao">贵州</option>
+                        <option value="Taobao">云南</option>
+                        <option value="Taobao">西藏</option>
+                        <option value="Taobao">陕西</option>
+                        <option value="Taobao">甘肃</option>
+                        <option value="Taobao">青海</option>
+                        <option value="Google">宁夏</option>
+                        <option value="Runoob">新疆</option>
+                        <option value="Taobao">台湾</option>
+                        <option value="Taobao">香港</option>
+                        <option value="Taobao">澳门</option>
+
+                    </select>
+                </form>
+            </div>
+
+
+            <ul class="nav nav-pills justify-content-center" role="tablist" style="padding-left: 20px; margin-top: 30px;">
+                <p style="margin-top: 10px;margin-left: 20px;">科类：</p>
+
+                <li class="nav-item" style="margin-left: 20px">
+                    <a class="nav-link active" data-toggle="pill" href="#">文科</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="pill" href="#">理科</a>
+                </li>
+            </ul>
+
+
+
+
+            <div class="container" style="padding-left: 140px; margin-top: 30px;">
+                <form>
+                    <div class="form-group">
+                        <p class="custom-control-inline" style="margin-left: 5px">位次：</p>
+                        <input id="id2" type="text" onkeyup="this.value=this.value.replace(/\D/g,'')" placeholder="请输入位次">
+                    </div>
+                </form>
+            </div>
+
+
+
+            <div class="container text-center">
+                <button type="button" class="btn btn-primary" style="margin-top: 30px;" onclick="check2()">选大学</button>
+            </div>
+
+            <div class="container" style="margin-top: 30px;font-size: smaller;" >
+                <a href="#" class="text-info" data-toggle="modal" data-target="#myModal2">推荐规则</a>
+            </div>
+            <!-- 模态框 -->
+            <div class="modal fade" id="myModal2">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+
+                        <!-- 模态框头部 -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">推荐规则</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <!-- 模态框主体 -->
+                        <div class="modal-body">
+                            <p>1、本查询系统的信息仅供参考，具体数据请以学校官网或考试院公布为准。</p>
+                            <p>2、考生输入分数，系统将根据在当省招生的高校招生情况，推荐合适的高校；</p>
+                            <p>3、本系统推荐的院校名单，仅供志愿参考。</p>
+                        </div>
+
+                        <!-- 模态框底部 -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <!-- 				<div id="rank" class="container tab-pane fade"><br>
+
+                        </div> -->
+
+
+
+
+
+
+    </div>
+</div>
+
+
+
+
+
+</body>
+</html>
