@@ -37,7 +37,7 @@ public class InfoSearchJsonRspUtil implements Serializable {
         JSONObject body_json=new JSONObject();
         body_json.put("RESP_CODE","8888");
         body_json.put("RESP_DESC",errorMsg);
-
+        body_json.put("COLOR","pink");
         rsp_json.put("QRY_ACCT_INFO_RSP",body_json);
         json.put("UNI_BSS_BODY",rsp_json);
 

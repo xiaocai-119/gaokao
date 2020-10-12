@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="referrer" content="no-referrer">
     <title>高考志愿查询</title>
 
     <!-- load stylesheets -->
@@ -39,24 +40,29 @@
                 success:function(resp){
                     alert(resp.UNI_BSS_BODY.QRY_ACCT_INFO_RSP.RESP_DESC);
 
-                    colorData='green'
+                    imgSrc='https://bkimg.cdn.bcebos.com/pic/d439b6003af33a87e9503dcefa1607385343faf21f87?x-bce-process=image/resize,m_lfit,w_268,limit_1/format,f_jpg';
+                    colorData=resp.UNI_BSS_BODY.QRY_ACCT_INFO_RSP.COLOR;
                     color='tm-button-'+colorData+'"';
                     strData='';
+                    url='https://www.ylu.edu.cn/';
+                    score='516';
+                    collegeName='玉林师范学院';
+                    desc='玉林师范学院（Yulin Normal University）位于中国优秀旅游城市、广西东南部的玉林市，是广西壮族自治区直属全日制普通本科高校，是广西4所高等教育综合改革试点高校之一。2016年，入选教育部数据中国“百校工程”合作院校。';
                     str='<div class="row mb-5">\n' +
                         '                        <div class="media tm-flexbox-ie-fix tm-width-ie-fix">\n' +
                         '                            <div class="tm-media-img-container">\n' +
-                        '                                <div class="text-center pt-31 pb-31 tm-timeline-date '+color+'>16 November 2017</div>\n' +
-                        '                                <img class="d-flex img-fluid" src="img/610x610-02.jpg" alt="Generic placeholder image">\n' +
+                        '                                <div class="text-center pt-31 pb-31 tm-timeline-date '+color+'>'+score+'</div>\n' +
+                        '                                <img class="d-flex img-fluid" src="'+imgSrc+'" alt="Generic placeholder image">\n' +
                         '                            </div>\n' +
                         '                          \n' +
                         '                            <div class="media-body tm-flexbox-ie-fix tm-width-ie-fix tm-bg-light-gray">\n' +
                         '                                <div class="p-5">\n' +
-                        '                                    <h2 class="mb-4 mt-0 tm-blue-text tm-timeline-item-title">Etiam fringilla ipsum at molestie</h2>\n' +
+                        '                                    <h2 class="mb-4 mt-0 tm-blue-text tm-timeline-item-title">'+collegeName+'</h2>\n' +
                         '                                    <p class="mb-4">\n' +
-                        '                                    Nulla venenatis leo ultrices ipsum pellentesque fringilla. Donec viverra purus sit amet ante venenatis placerat. Duis venenatis sed mauris sit amet sodales. In maximus eros nisl, ac egestas lorem suscipit ac. Cras interdum eu dui sit amet vehicula. Maecenas congue dui ante, eget elementum leo vulputate eu.\n' +
+                        '                                    '+desc+'\n' +
                         '                                    </p>\n' +
                         '                                \n' +
-                        '                                    <a href="#" class="btn btn-primary tm-button-rounded '+color+' tm-button-no-border tm-button-normal tm-button-timeline">Read More</a>\n' +
+                        '                                    <a href="'+url+'" class="btn btn-primary tm-button-rounded '+color+' tm-button-no-border tm-button-normal tm-button-timeline" target="_blank">Read More</a>\n' +
                         '                                </div>                            \n' +
                         '                            </div>\n' +
                         '                        </div>\n' +
@@ -116,6 +122,7 @@
                                     <option value="tianjin">天津</option>
                                     <option value="hebei">河北</option>
                                     <option value="shanxi">山西</option>
+                                    <option value="guangxi">广西</option>
                                 </select>
                             </div>
 
@@ -133,7 +140,7 @@
 
                             <div style="margin-top:15px;">
                                 <text style="font-size:15px;margin-left:-35px;">分数/位次：</text>
-                                <input id="scoreId" type="text" style="width:150px;height:25px;margin-top:20px;">
+                                <input id="scoreId" type="text" maxlength="8" style="width:150px;height:25px;margin-top:20px;" onkeyup="this.value=this.value.replace(/\D/g,'')">
                             </div>
 
 
