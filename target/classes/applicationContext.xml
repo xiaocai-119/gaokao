@@ -18,7 +18,7 @@ xmlns:context="http://www.springframework.org/schema/context"
         <!-- 加载配置文件 -->
 <context:component-scan base-package="z.hong.controller"></context:component-scan>
         <!--读取数据源        -->
-        <context:property-placeholder location="classpath: db.properties"/>
+        <context:property-placeholder location="classpath:db.properties"/>
         <!--配置数据库-->
         <bean id="datasoures"
                 class="org.apache.commons.dbcp.BasicDataSource">

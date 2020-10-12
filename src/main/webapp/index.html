@@ -1,286 +1,263 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-    <script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
-    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
-    <script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>高考志愿查询</title>
 
-    <title>index</title>
+    <!-- load stylesheets -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400">   <!-- Google web font "Open Sans", https://fonts.google.com/ -->
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">           <!-- Font Awesome, http://fontawesome.io/ -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">                                 <!-- Bootstrap styles, https://getbootstrap.com/ -->
+    <link rel="stylesheet" href="css/tooplate-style.css">
+    <script src="./js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+        });
+        function check(){
+            var da={
+                "province":"",
+                "qyr_type": "",
+                "score":"",
+                "rank":""
+            };
+            $.ajax({
+                type:"post",
+                url:"http://localhost:8080/api/qryCollege",
+                contentType:"application/json;charset=utf-8",
+                data:JSON.stringify(da),
+                dataType:"json",
+                success:function(resp){
+                    alert(resp.UNI_BSS_BODY.QRY_ACCT_INFO_RSP.RESP_DESC);
+                },
+                error:function(err){
+                    alert(err);
+                }
+
+            })
+            colorData='green'
+            color='tm-button-'+colorData+'"';
+            strData='';
+            str='<div class="row mb-5">\n' +
+                '                        <div class="media tm-flexbox-ie-fix tm-width-ie-fix">\n' +
+                '                            <div class="tm-media-img-container">\n' +
+                '                                <div class="text-center pt-31 pb-31 tm-timeline-date '+color+'>16 November 2017</div>\n' +
+                '                                <img class="d-flex img-fluid" src="img/610x610-02.jpg" alt="Generic placeholder image">\n' +
+                '                            </div>\n' +
+                '                          \n' +
+                '                            <div class="media-body tm-flexbox-ie-fix tm-width-ie-fix tm-bg-light-gray">\n' +
+                '                                <div class="p-5">\n' +
+                '                                    <h2 class="mb-4 mt-0 tm-blue-text tm-timeline-item-title">Etiam fringilla ipsum at molestie</h2>\n' +
+                '                                    <p class="mb-4">\n' +
+                '                                    Nulla venenatis leo ultrices ipsum pellentesque fringilla. Donec viverra purus sit amet ante venenatis placerat. Duis venenatis sed mauris sit amet sodales. In maximus eros nisl, ac egestas lorem suscipit ac. Cras interdum eu dui sit amet vehicula. Maecenas congue dui ante, eget elementum leo vulputate eu.\n' +
+                '                                    </p>\n' +
+                '                                \n' +
+                '                                    <a href="#" class="btn btn-primary tm-button-rounded '+color+' tm-button-no-border tm-button-normal tm-button-timeline">Read More</a>\n' +
+                '                                </div>                            \n' +
+                '                            </div>\n' +
+                '                        </div>\n' +
+                '                    </div>';
+            for(var i=0;i<10;i++){
+                strData+=str;
+            }
+            $(".tm-main-content").html(strData);
+            //alert($("#scoreId").val());
+            //alert($(".active").first().text());
+            //alert($(".active").eq(-1).text());
+            //alert($(":selected").text());
+        }
+    </script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
+
 <body>
-<script type="text/javascript">
-    function check1(){
-        if(document.getElementById('id1').value==0){
-            alert('分数必填!');
-            document.getElementById('id1').focus();
-            return false;
-        }
-    }
-    function check2(){
-        if(document.getElementById('id2').value==0){
-            alert('位次必填!');
-            document.getElementById('id2').focus();
-            return false;
-        }
-    }
-</script>
+<div class="container-fluid">
+    <div class="tm-body">
+        <div class="tm-sidebar sticky">
+            <section id="welcome" class="tm-content-box tm-banner margin-b-15">
+                <div class="tm-banner-inner">
+                    <h1 style="padding-top:50px">高考志愿查询</h1>
+                    <p class="tm-banner-subtitle">应用程序设计系统</p>
+                </div>
+            </section>
+            <nav class="tm-main-nav">
+                <div>
+
+                    <ul class="nav nav-pills justify-content-center" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="pill" href=""><text style="font-size:15px;">&nbsp;&nbsp;&nbsp;&nbsp;分数&nbsp;&nbsp;&nbsp;&nbsp;</text></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="pill" href=""><text style="font-size:15px;">&nbsp;&nbsp;&nbsp;&nbsp;位次&nbsp;&nbsp;&nbsp;&nbsp;</text></a>
+                        </li>
+                    </ul>
 
 
-<div class="container">
-    <h2 class="text-center" style="margin-top: 50px;">高考志愿填报服务小平台</h2>
-    <br>
-    <!-- Nav pills -->
-    <ul class="nav nav-pills justify-content-center" role="tablist">
-        <li class="nav-item">
-            <a class="nav-link active" data-toggle="pill" href="#grade">分数选大学</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link disabled invisible" data-toggle="pill" href="#">间隔</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="pill" href="#rank">位次选大学</a>
-        </li>
-    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div id="grade" class="container tab-pane active text-center"><br>
+                            <div class="container mt-3" style="max-height: 100px;">
+                                <p class="custom-control-inline"><text style="font-size:15px;margin-left:-40px;">生源：</text></p>
+                                <select name="cars" class="custom-select-sm" style="width: 100px;margin-left:-20px;">
+                                    <option selected value="beijing">北京</option>
+                                    <option value="tianjin">天津</option>
+                                    <option value="hebei">河北</option>
+                                    <option value="shanxi">山西</option>
+                                </select>
+                            </div>
 
 
-    <!-- Tab panes -->
-    <div class="tab-content">
-        <div id="grade" class="container tab-pane active text-center"><br>
-            <div class="container mt-3" style="max-height: 100px;">
-                <form>
-                    <p class="custom-control-inline">生源：</p>
-                    <select name="cars" class="custom-select-sm" style="width: 100px;">
-                        <option selected>北京</option>
-                        <option value="Runoob">天津</option>
-                        <option value="Taobao">河北</option>
-                        <option value="Taobao">山西</option>
-                        <option value="Taobao">内蒙古</option>
-                        <option value="Taobao">辽宁</option>
-                        <option value="Taobao">吉林</option>
-                        <option value="Taobao">黑龙江</option>
-                        <option value="Taobao">上海</option>
-                        <option value="Google">浙江</option>
-                        <option value="Runoob">江苏</option>
-                        <option value="Taobao">安徽</option>
-                        <option value="Taobao">福建</option>
-                        <option value="Taobao">江西</option>
-                        <option value="Taobao">山东</option>
-                        <option value="Taobao">河南</option>
-                        <option value="Taobao">湖北</option>
-                        <option value="Taobao">湖南</option>
-                        <option value="Google">广东</option>
-                        <option value="Runoob">广西</option>
-                        <option value="Taobao">海南</option>
-                        <option value="Taobao">重庆</option>
-                        <option value="Taobao">四川</option>
-                        <option value="Taobao">贵州</option>
-                        <option value="Taobao">云南</option>
-                        <option value="Taobao">西藏</option>
-                        <option value="Taobao">陕西</option>
-                        <option value="Taobao">甘肃</option>
-                        <option value="Taobao">青海</option>
-                        <option value="Google">宁夏</option>
-                        <option value="Runoob">新疆</option>
-                        <option value="Taobao">台湾</option>
-                        <option value="Taobao">香港</option>
-                        <option value="Taobao">澳门</option>
-
-                    </select>
-                </form>
-            </div>
+                            <ul class="nav nav-pills justify-content-center" role="tablist" style="padding-left: 20px; margin-top: 15px;">
+                                <text style="font-size:15px;margin-left:-40px;margin-top:10px"><p>科类：</p></text>
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="pill" href="#"><text style="font-size:15px;">文科</text></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="pill" href="#"><text style="font-size:15px;">理科</text></a>
+                                </li>
+                            </ul>
 
 
-            <ul class="nav nav-pills justify-content-center" role="tablist" style="padding-left: 20px; margin-top: 30px;">
-                <p style="margin-top: 10px;margin-left: 20px;">科类：</p>
+                            <div style="margin-top:15px;">
+                                <text style="font-size:15px;margin-left:5px;">考分：</text>
+                                <input id="scoreId" type="text" style="width:150px;height:25px;margin-top:20px;">
+                            </div>
 
-                <li class="nav-item" style="margin-left: 20px">
-                    <a class="nav-link active" data-toggle="pill" href="#">文科</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="pill" href="#">理科</a>
-                </li>
-            </ul>
+
+                            <div class="container text-center">
+                                <button type="button" class="btn btn-primary  btn-block" style="margin-top: 30px;" onclick="check()"/>查询</button>
+                            </div>
 
 
 
+                            <div class="container" style="margin-top: 30px;font-size: smaller;" >
+                                <a href="" class="text-info" data-toggle="modal" data-target="#myModal">推荐规则</a>
+                            </div>
 
-            <div class="container" style="padding-left: 140px; margin-top: 30px;">
-                <form>
-                    <div class="form-group">
-                        <p class="custom-control-inline" style="margin-left: 5px">考分：</p>
-                        <input id="id1" type="text" onkeyup="this.value=this.value.replace(/\D/g,'')" placeholder="请输入考分">
+                        </div>
                     </div>
-                </form>
-            </div>
+                </div>
 
+            </nav>
+        </div>>
 
-            <div class="container text-center">
-                <button type="button" class="btn btn-primary" style="margin-top: 30px;" onclick="check1()">选大学</button>
-            </div>
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
 
-            <div class="container" style="margin-top: 30px;font-size: smaller;" >
-                <a href="#" class="text-info" data-toggle="modal" data-target="#myModal">推荐规则</a>
-            </div>
-            <!-- 模态框 -->
-            <div class="modal fade" id="myModal">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
+                    <!-- 模态框头部 -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">推荐规则</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
 
-                        <!-- 模态框头部 -->
-                        <div class="modal-header">
-                            <h4 class="modal-title">推荐规则</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
+                    <!-- 模态框主体 -->
+                    <div class="modal-body">
+                        <p>1、本查询系统的信息仅供参考，具体数据请以学校官网或考试院公布为准；</p>
+                        <p>2、考生输入分数，系统将根据当省招生的高校招生情况，推荐合适的高校；</p>
+                        <p>3、本系统推荐的院校名单，仅供志愿参考；&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                    </div>
 
-                        <!-- 模态框主体 -->
-                        <div class="modal-body">
-                            <p>1、本查询系统的信息仅供参考，具体数据请以学校官网或考试院公布为准。</p>
-                            <p>2、考生输入分数，系统将根据在当省招生的高校招生情况，推荐合适的高校；</p>
-                            <p>3、本系统推荐的院校名单，仅供志愿参考。</p>
-                        </div>
-
-                        <!-- 模态框底部 -->
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-                        </div>
-
+                    <!-- 模态框底部 -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
                     </div>
                 </div>
             </div>
-
-
-
         </div>
+        <div class="tm-main-content">
 
-
-
-
-        <div id="rank" class="container tab-pane text-center"><br>
-            <div class="container mt-3" style="max-height: 100px;">
-                <form>
-                    <p class="custom-control-inline">生源：</p>
-                    <select name="cars" class="custom-select-sm" style="width: 100px;">
-                        <option selected>北京</option>
-                        <option value="Runoob">天津</option>
-                        <option value="Taobao">河北</option>
-                        <option value="Taobao">山西</option>
-                        <option value="Taobao">内蒙古</option>
-                        <option value="Taobao">辽宁</option>
-                        <option value="Taobao">吉林</option>
-                        <option value="Taobao">黑龙江</option>
-                        <option value="Taobao">上海</option>
-                        <option value="Google">浙江</option>
-                        <option value="Runoob">江苏</option>
-                        <option value="Taobao">安徽</option>
-                        <option value="Taobao">福建</option>
-                        <option value="Taobao">江西</option>
-                        <option value="Taobao">山东</option>
-                        <option value="Taobao">河南</option>
-                        <option value="Taobao">湖北</option>
-                        <option value="Taobao">湖南</option>
-                        <option value="Google">广东</option>
-                        <option value="Runoob">广西</option>
-                        <option value="Taobao">海南</option>
-                        <option value="Taobao">重庆</option>
-                        <option value="Taobao">四川</option>
-                        <option value="Taobao">贵州</option>
-                        <option value="Taobao">云南</option>
-                        <option value="Taobao">西藏</option>
-                        <option value="Taobao">陕西</option>
-                        <option value="Taobao">甘肃</option>
-                        <option value="Taobao">青海</option>
-                        <option value="Google">宁夏</option>
-                        <option value="Runoob">新疆</option>
-                        <option value="Taobao">台湾</option>
-                        <option value="Taobao">香港</option>
-                        <option value="Taobao">澳门</option>
-
-                    </select>
-                </form>
-            </div>
-
-
-            <ul class="nav nav-pills justify-content-center" role="tablist" style="padding-left: 20px; margin-top: 30px;">
-                <p style="margin-top: 10px;margin-left: 20px;">科类：</p>
-
-                <li class="nav-item" style="margin-left: 20px">
-                    <a class="nav-link active" data-toggle="pill" href="#">文科</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="pill" href="#">理科</a>
-                </li>
-            </ul>
-
-
-
-
-            <div class="container" style="padding-left: 140px; margin-top: 30px;">
-                <form>
-                    <div class="form-group">
-                        <p class="custom-control-inline" style="margin-left: 5px">位次：</p>
-                        <input id="id2" type="text" onkeyup="this.value=this.value.replace(/\D/g,'')" placeholder="请输入位次">
+            <div class="row mb-5">
+                <div class="media tm-flexbox-ie-fix tm-width-ie-fix">
+                    <div class="tm-media-img-container">
+                        <div class="text-center pt-31 pb-31 tm-timeline-date tm-bg-pink">21 November 2017</div>
+                        <img class="d-flex img-fluid" src="img/610x610-01.jpg" alt="Generic placeholder image">
                     </div>
-                </form>
-            </div>
 
+                    <div class="media-body tm-flexbox-ie-fix tm-width-ie-fix tm-bg-light-gray">
+                        <div class="p-5">
+                            <h2 class="mb-4 mt-0 tm-blue-text tm-timeline-item-title">Nulla tempor tempus efficitur</h2>
+                            <p class="mb-4">
+                                Ut molestie odio et nisl congue fermentum. Aliquam consectetur est at orci aliquam maximus. Curabitur vitae arcu congue, laoreet sem ut, congue eros. Integer bibendum lorem lorem, quis consectetur magna fringilla in. Donec dapibus efficitur odio ac cursus. Integer imperdiet rhoncus volutpat.
+                            </p>
 
-
-            <div class="container text-center">
-                <button type="button" class="btn btn-primary" style="margin-top: 30px;" onclick="check2()">选大学</button>
-            </div>
-
-            <div class="container" style="margin-top: 30px;font-size: smaller;" >
-                <a href="#" class="text-info" data-toggle="modal" data-target="#myModal2">推荐规则</a>
-            </div>
-            <!-- 模态框 -->
-            <div class="modal fade" id="myModal2">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-
-                        <!-- 模态框头部 -->
-                        <div class="modal-header">
-                            <h4 class="modal-title">推荐规则</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <a href="#" class="btn btn-primary tm-button-rounded tm-button-pink tm-button-no-border tm-button-normal tm-button-timeline">Read More</a>
                         </div>
-
-                        <!-- 模态框主体 -->
-                        <div class="modal-body">
-                            <p>1、本查询系统的信息仅供参考，具体数据请以学校官网或考试院公布为准。</p>
-                            <p>2、考生输入分数，系统将根据在当省招生的高校招生情况，推荐合适的高校；</p>
-                            <p>3、本系统推荐的院校名单，仅供志愿参考。</p>
-                        </div>
-
-                        <!-- 模态框底部 -->
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-                        </div>
-
                     </div>
                 </div>
-            </div>
+            </div> <!-- row -->
 
+            <div class="row mb-5">
+                <div class="media tm-flexbox-ie-fix tm-width-ie-fix">
+                    <div class="tm-media-img-container">
+                        <div class="text-center pt-31 pb-31 tm-timeline-date tm-bg-green">16 November 2017</div>
+                        <img class="d-flex img-fluid" src="img/610x610-02.jpg" alt="Generic placeholder image">
+                    </div>
 
+                    <div class="media-body tm-flexbox-ie-fix tm-width-ie-fix tm-bg-light-gray">
+                        <div class="p-5">
+                            <h2 class="mb-4 mt-0 tm-blue-text tm-timeline-item-title">Etiam fringilla ipsum at molestie</h2>
+                            <p class="mb-4">
+                                Nulla venenatis leo ultrices ipsum pellentesque fringilla. Donec viverra purus sit amet ante venenatis placerat. Duis venenatis sed mauris sit amet sodales. In maximus eros nisl, ac egestas lorem suscipit ac. Cras interdum eu dui sit amet vehicula. Maecenas congue dui ante, eget elementum leo vulputate eu.
+                            </p>
 
+                            <a href="#" class="btn btn-primary tm-button-rounded tm-button-green tm-button-no-border tm-button-normal tm-button-timeline">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- row -->
+
+            <div class="row mb-5">
+                <div class="media tm-flexbox-ie-fix tm-width-ie-fix">
+                    <div class="tm-media-img-container">
+                        <div class="text-center pt-31 pb-31 tm-timeline-date tm-bg-red">22 October 2017</div>
+                        <img class="d-flex img-fluid" src="img/610x610-03.jpg" alt="Generic placeholder image">
+                    </div>
+
+                    <div class="media-body tm-flexbox-ie-fix tm-width-ie-fix tm-bg-light-gray">
+                        <div class="p-5">
+                            <h2 class="mb-4 mt-0 tm-blue-text tm-timeline-item-title">Aliquam consectetur est at orci</h2>
+                            <p class="mb-4">Etiam aliquet metus nec nulla gravida, et consequat sapien venenatis. Cras commodo ullamcorper tortor, ut volutpat nulla eleifend quis. Nunc rhoncus malesuada nulla, quis tincidunt arcu dapibus non. Nulla vel risus sodales, hendrerit turpis eu, rhoncus nibh. Sed vel vestibulum velit, et tempus eros.</p>
+
+                            <a href="#" class="btn btn-primary tm-button-rounded tm-button-red tm-button-no-border tm-button-normal tm-button-timeline">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- row -->
+
+            <div class="row mb-5">
+                <div class="media tm-flexbox-ie-fix tm-width-ie-fix">
+                    <div class="tm-media-img-container">
+                        <div class="text-center pt-31 pb-31 tm-timeline-date tm-bg-gray">18 October 2017</div>
+                        <img class="d-flex img-fluid" src="img/610x610-04.jpg" alt="Generic placeholder image">
+                    </div>
+
+                    <div class="media-body tm-flexbox-ie-fix tm-width-ie-fix tm-bg-light-gray">
+                        <div class="p-5">
+                            <h2 class="mb-4 mt-0 tm-blue-text tm-timeline-item-title">Donec quis fermentum nulla</h2>
+                            <p class="mb-4">Vivamus efficitur lorem ac velit vulputate, sed consectetur leo fermentum. Fusce non lacinia eros. Suspendisse pharetra nisi fermentum bibendum condimentum. Nam sit amet consectetur dui. Ut malesuada commodo enim, nec varius diam ultricies finibus. Curabitur molestie dui vel metus iaculis suscipit.</p>
+                            <a href="#" class="btn btn-primary tm-button-rounded tm-button-gray tm-button-no-border tm-button-normal tm-button-timeline">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- row -->
         </div>
-
-        <!-- 				<div id="rank" class="container tab-pane fade"><br>
-
-                        </div> -->
-
-
-
-
-
-
     </div>
+
+    <footer class="tm-footer text-right">
+        <p>第3组：蔡镇宇、陈锐、陈济楷、谢炎武</p>
+        <p>陈卓坚、杨嘉源</p>
+    </footer>
 </div>
-
-
-
-
-
 </body>
 </html>
