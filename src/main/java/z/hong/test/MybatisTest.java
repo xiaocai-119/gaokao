@@ -40,7 +40,7 @@ public class MybatisTest {
         for (College college : colleges){
             Map<String,Object> rell = new HashMap<String, Object>();
             rell.put("college_id",college.getCollege_id());
-            System.out.println(rell.get("college_id"));
+           // System.out.println(rell.get("college_id"));
             rell.put("college_name",college.getCollege_name());
             rell.put("college_location",college.getCollege_location());
             rell.put("art_min_grade",college.getArt_min_grade());

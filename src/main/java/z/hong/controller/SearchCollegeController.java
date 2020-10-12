@@ -29,7 +29,8 @@ public class SearchCollegeController {
 
     @PostMapping(value = "/qryCollege")
     public JSONObject qryCollege(@RequestBody JSONObject jsonObject){
-        logger.info("大学查询接口");
+        logger.info("-----------大学查询接口-----------");
+        logger.info(String.valueOf(jsonObject));
         return InfoSearchJsonRspUtil.createErrorRsp("查询失败");
     }
 }

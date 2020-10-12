@@ -19,11 +19,16 @@
 
         });
         function check(){
+            var qyr_type=$(".active").first().text();
+            var province=$(":selected").text();
+            var subject=$(".active").eq(-1).text();
+            var value=$("#scoreId").val();
+
             var da={
-                "province":"",
-                "qyr_type": "",
-                "score":"",
-                "rank":""
+                "province":""+province,
+                "qyr_type":""+qyr_type,
+                "subject":""+subject,
+                "value":""+value
             };
             $.ajax({
                 type:"post",
@@ -33,42 +38,40 @@
                 dataType:"json",
                 success:function(resp){
                     alert(resp.UNI_BSS_BODY.QRY_ACCT_INFO_RSP.RESP_DESC);
+
+                    colorData='green'
+                    color='tm-button-'+colorData+'"';
+                    strData='';
+                    str='<div class="row mb-5">\n' +
+                        '                        <div class="media tm-flexbox-ie-fix tm-width-ie-fix">\n' +
+                        '                            <div class="tm-media-img-container">\n' +
+                        '                                <div class="text-center pt-31 pb-31 tm-timeline-date '+color+'>16 November 2017</div>\n' +
+                        '                                <img class="d-flex img-fluid" src="img/610x610-02.jpg" alt="Generic placeholder image">\n' +
+                        '                            </div>\n' +
+                        '                          \n' +
+                        '                            <div class="media-body tm-flexbox-ie-fix tm-width-ie-fix tm-bg-light-gray">\n' +
+                        '                                <div class="p-5">\n' +
+                        '                                    <h2 class="mb-4 mt-0 tm-blue-text tm-timeline-item-title">Etiam fringilla ipsum at molestie</h2>\n' +
+                        '                                    <p class="mb-4">\n' +
+                        '                                    Nulla venenatis leo ultrices ipsum pellentesque fringilla. Donec viverra purus sit amet ante venenatis placerat. Duis venenatis sed mauris sit amet sodales. In maximus eros nisl, ac egestas lorem suscipit ac. Cras interdum eu dui sit amet vehicula. Maecenas congue dui ante, eget elementum leo vulputate eu.\n' +
+                        '                                    </p>\n' +
+                        '                                \n' +
+                        '                                    <a href="#" class="btn btn-primary tm-button-rounded '+color+' tm-button-no-border tm-button-normal tm-button-timeline">Read More</a>\n' +
+                        '                                </div>                            \n' +
+                        '                            </div>\n' +
+                        '                        </div>\n' +
+                        '                    </div>';
+                    for(var i=0;i<10;i++){
+                        strData+=str;
+                    }
+                    $(".tm-main-content").html(strData);
                 },
                 error:function(err){
                     alert(err);
                 }
 
             })
-            colorData='green'
-            color='tm-button-'+colorData+'"';
-            strData='';
-            str='<div class="row mb-5">\n' +
-                '                        <div class="media tm-flexbox-ie-fix tm-width-ie-fix">\n' +
-                '                            <div class="tm-media-img-container">\n' +
-                '                                <div class="text-center pt-31 pb-31 tm-timeline-date '+color+'>16 November 2017</div>\n' +
-                '                                <img class="d-flex img-fluid" src="img/610x610-02.jpg" alt="Generic placeholder image">\n' +
-                '                            </div>\n' +
-                '                          \n' +
-                '                            <div class="media-body tm-flexbox-ie-fix tm-width-ie-fix tm-bg-light-gray">\n' +
-                '                                <div class="p-5">\n' +
-                '                                    <h2 class="mb-4 mt-0 tm-blue-text tm-timeline-item-title">Etiam fringilla ipsum at molestie</h2>\n' +
-                '                                    <p class="mb-4">\n' +
-                '                                    Nulla venenatis leo ultrices ipsum pellentesque fringilla. Donec viverra purus sit amet ante venenatis placerat. Duis venenatis sed mauris sit amet sodales. In maximus eros nisl, ac egestas lorem suscipit ac. Cras interdum eu dui sit amet vehicula. Maecenas congue dui ante, eget elementum leo vulputate eu.\n' +
-                '                                    </p>\n' +
-                '                                \n' +
-                '                                    <a href="#" class="btn btn-primary tm-button-rounded '+color+' tm-button-no-border tm-button-normal tm-button-timeline">Read More</a>\n' +
-                '                                </div>                            \n' +
-                '                            </div>\n' +
-                '                        </div>\n' +
-                '                    </div>';
-            for(var i=0;i<10;i++){
-                strData+=str;
-            }
-            $(".tm-main-content").html(strData);
-            //alert($("#scoreId").val());
-            //alert($(".active").first().text());
-            //alert($(".active").eq(-1).text());
-            //alert($(":selected").text());
+
         }
     </script>
 
@@ -94,11 +97,11 @@
                 <div>
 
                     <ul class="nav nav-pills justify-content-center" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-toggle="pill" href=""><text style="font-size:15px;">&nbsp;&nbsp;&nbsp;&nbsp;分数&nbsp;&nbsp;&nbsp;&nbsp;</text></a>
+                        <li class="nav-item" style="width:70px;">
+                            <a class="nav-link active" data-toggle="pill" href=""><text style="font-size:15px;">分数</text></a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="pill" href=""><text style="font-size:15px;">&nbsp;&nbsp;&nbsp;&nbsp;位次&nbsp;&nbsp;&nbsp;&nbsp;</text></a>
+                        <li class="nav-item" style="width:70px;">
+                            <a class="nav-link" data-toggle="pill" href=""><text style="font-size:15px;">位次</text></a>
                         </li>
                     </ul>
 
@@ -107,7 +110,7 @@
                     <div class="tab-content">
                         <div id="grade" class="container tab-pane active text-center"><br>
                             <div class="container mt-3" style="max-height: 100px;">
-                                <p class="custom-control-inline"><text style="font-size:15px;margin-left:-40px;">生源：</text></p>
+                                <p class="custom-control-inline"><text style="font-size:15px;margin-left:-40px;">来源：</text></p>
                                 <select name="cars" class="custom-select-sm" style="width: 100px;margin-left:-20px;">
                                     <option selected value="beijing">北京</option>
                                     <option value="tianjin">天津</option>
@@ -129,7 +132,7 @@
 
 
                             <div style="margin-top:15px;">
-                                <text style="font-size:15px;margin-left:5px;">考分：</text>
+                                <text style="font-size:15px;margin-left:-35px;">分数/位次：</text>
                                 <input id="scoreId" type="text" style="width:150px;height:25px;margin-top:20px;">
                             </div>
 
@@ -164,7 +167,7 @@
                     <!-- 模态框主体 -->
                     <div class="modal-body">
                         <p>1、本查询系统的信息仅供参考，具体数据请以学校官网或考试院公布为准；</p>
-                        <p>2、考生输入分数，系统将根据当省招生的高校招生情况，推荐合适的高校；</p>
+                        <p>2、考生输入分数/位次，系统将根据当省招生的高校招生情况，推荐合适的高校；</p>
                         <p>3、本系统推荐的院校名单，仅供志愿参考；&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
                     </div>
 
