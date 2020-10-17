@@ -1,5 +1,6 @@
 package z.hong.po;
 //持久化类
+
 public class College {
     private Integer college_id;
     private String college_name;
@@ -8,6 +9,10 @@ public class College {
     private Integer art_min_rank;
     private Integer science_min_grade;
     private Integer science_min_rank;
+    private String desc;
+    private String url;
+    private String img;
+
 
     public Integer getCollege_id() {
         return college_id;
@@ -65,6 +70,30 @@ public class College {
         this.science_min_rank = science_min_rank;
     }
 
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
     @Override
     public String toString() {
         return "College{" +
@@ -75,6 +104,9 @@ public class College {
                 ", art_min_rank=" + art_min_rank +
                 ", science_min_grade=" + science_min_grade +
                 ", science_min_rank=" + science_min_rank +
+                ", desc='" + desc + '\'' +
+                ", url='" + url + '\'' +
+                ", img='" + img + '\'' +
                 '}';
     }
 }

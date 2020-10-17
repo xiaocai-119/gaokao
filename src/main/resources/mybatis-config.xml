@@ -6,21 +6,9 @@
     <typeAliases>
         <package name="z.hong.po" />
     </typeAliases>
-<!--    1.配置环境-->
-    <environments default="mysql">
-        <environment id="mysql">
-            <transactionManager type="JDBC"></transactionManager>
-            <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/hello?userSSL=true&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC"/>
-                <property name="username" value="root"/>
-                <property name="password" value="root"/>
-            </dataSource>
-        </environment>
 
-    </environments>
     <!--2.配置Mapper-->
     <mappers>
-        <mapper resource="College.xml"></mapper>
+        <mapper resource="z/hong/dao/CollegeMapper.xml"></mapper>
     </mappers>
 </configuration>

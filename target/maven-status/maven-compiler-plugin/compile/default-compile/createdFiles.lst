@@ -1,8 +1,0 @@
-z\hong\po\College.class
-z\hong\test\MybatisTest.class
-z\hong\util\InfoSearchJsonRspUtil.class
-z\hong\dao\CollegeDao.class
-z\hong\util\MybatisUtils.class
-z\hong\controller\SearchCollegeController.class
-z\hong\service\CollegeInfoSearch.class
-z\hong\service\impl\CollegeInfoSearchImpl.class

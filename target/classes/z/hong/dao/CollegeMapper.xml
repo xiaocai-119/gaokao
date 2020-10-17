@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org./dtd/mybatis-3-mapper.dtd">
+<mapper namespace="z.hong.dao.CollegeMapper">
+    <!--按排名查询-->
+    <select id="selectCollegeRank" parameterType="map" resultType="college">
+        SELECT
+        college_id, college_name, college_location, art_min_grade, art_min_rank, science_min_grade, science_min_rank, `desc`, url, img
+        FROM college
+        <where>
+            <!--判断学校所在的省份-->
+            <if test="province != null">
+                college_location = #{province}
+            </if>
+            <!--根据文理科的成绩进行查询-->
+            <choose>
+                <when test="subject=='文科' and value!=''">
+                    and art_min_rank >= #{value}-5000  and #{value}+5000 >= art_min_rank
+                </when>
+                <when test="subject=='理科' and value!=''">
+                    and science_min_rank >= #{value}-5000 and #{value}+5000 >= science_min_rank
+                </when>
+            </choose>
+        </where>
+        <!--升序排序-->
+        order by
+        <choose>
+            <when test="subject == '文科'">
+                art_min_rank
+            </when>
+            <when test="subject == '理科'">
+                science_min_rank
+            </when>
+        </choose>
+        ASC
+    </select>
+
+    <!--按分数查询-->
+    <select id="selectCollegeGrade" parameterType="map" resultType="college">
+        SELECT
+        college_id, college_name, college_location, art_min_grade, art_min_rank, science_min_grade, science_min_rank, `desc`, url, img
+        FROM college
+        <where>
+            <!--判断学校所在的省份-->
+            <if test="province != null">
+                college_location = #{province}
+            </if>
+            <!--根据文理科的成绩进行查询-->
+            <choose>
+                <when test="subject=='文科' and value!=''">
+                    and art_min_grade >= #{value}-5 and #{value}+5 >= art_min_grade
+                </when>
+                <when test="subject=='理科' and value!=''">
+                    and science_min_grade >= #{value}-5 and #{value}+5 >= science_min_grade
+                </when>
+            </choose>
+        </where>
+        <!--降序排序-->
+        order by
+        <choose>
+            <when test="subject == '文科'">
+                art_min_grade
+            </when>
+            <when test="subject == '理科'">
+                science_min_grade
+            </when>
+        </choose>
+        DESC
+    </select>
+</mapper>

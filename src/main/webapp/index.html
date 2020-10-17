@@ -16,9 +16,13 @@
     <script src="./js/jquery.js" type="text/javascript" charset="utf-8"></script>
     <script src="./js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
-        $(document).ready(function(){
-            check();
-        });
+        function scoreText(){
+            $("#textId").html("分数：");
+        }
+        function rankText(){
+            $("#textId").html("位次：");
+        }
+
         function check(){
             var qyr_type=$(".active").first().text();
             var province=$(":selected").text();
@@ -40,35 +44,40 @@
                 success:function(resp){
                     alert(resp.UNI_BSS_BODY.QRY_ACCT_INFO_RSP.RESP_DESC);
 
-                    imgSrc='https://bkimg.cdn.bcebos.com/pic/d439b6003af33a87e9503dcefa1607385343faf21f87?x-bce-process=image/resize,m_lfit,w_268,limit_1/format,f_jpg';
-                    colorData=resp.UNI_BSS_BODY.QRY_ACCT_INFO_RSP.COLOR;
-                    color='tm-button-'+colorData+'"';
                     strData='';
-                    url='https://www.ylu.edu.cn/';
-                    score='516';
-                    collegeName='玉林师范学院';
-                    desc='玉林师范学院（Yulin Normal University）位于中国优秀旅游城市、广西东南部的玉林市，是广西壮族自治区直属全日制普通本科高校，是广西4所高等教育综合改革试点高校之一。2016年，入选教育部数据中国“百校工程”合作院校。';
-                    str='<div class="row mb-5">\n' +
-                        '                        <div class="media tm-flexbox-ie-fix tm-width-ie-fix">\n' +
-                        '                            <div class="tm-media-img-container">\n' +
-                        '                                <div class="text-center pt-31 pb-31 tm-timeline-date '+color+'>'+score+'</div>\n' +
-                        '                                <img class="d-flex img-fluid" src="'+imgSrc+'" alt="Generic placeholder image">\n' +
-                        '                            </div>\n' +
-                        '                          \n' +
-                        '                            <div class="media-body tm-flexbox-ie-fix tm-width-ie-fix tm-bg-light-gray">\n' +
-                        '                                <div class="p-5">\n' +
-                        '                                    <h2 class="mb-4 mt-0 tm-blue-text tm-timeline-item-title">'+collegeName+'</h2>\n' +
-                        '                                    <p class="mb-4">\n' +
-                        '                                    '+desc+'\n' +
-                        '                                    </p>\n' +
-                        '                                \n' +
-                        '                                    <a href="'+url+'" class="btn btn-primary tm-button-rounded '+color+' tm-button-no-border tm-button-normal tm-button-timeline" target="_blank">Read More</a>\n' +
-                        '                                </div>                            \n' +
-                        '                            </div>\n' +
-                        '                        </div>\n' +
-                        '                    </div>';
-                    for(var i=0;i<10;i++){
-                        strData+=str;
+                    for(var i=0;i<resp.UNI_BSS_BODY.QRY_ACCT_INFO_RSP.DATAS.length;i++){
+                        imgSrc=resp.UNI_BSS_BODY.QRY_ACCT_INFO_RSP.DATAS[i].imgSrc;
+                        colorData=resp.UNI_BSS_BODY.QRY_ACCT_INFO_RSP.DATAS[i].color;
+                        color='tm-button-'+colorData+'"';
+                        // colorData="pink";
+                        // color='tm-button-'+colorData+'"';
+
+
+                        url=resp.UNI_BSS_BODY.QRY_ACCT_INFO_RSP.DATAS[i].url;
+                        score=resp.UNI_BSS_BODY.QRY_ACCT_INFO_RSP.DATAS[i].da;
+                        collegeName=resp.UNI_BSS_BODY.QRY_ACCT_INFO_RSP.DATAS[i].collegeName;
+                        desc=resp.UNI_BSS_BODY.QRY_ACCT_INFO_RSP.DATAS[i].desc;
+
+                        str='<div class="row mb-5">\n' +
+                            '                        <div class="media tm-flexbox-ie-fix tm-width-ie-fix">\n' +
+                            '                            <div class="tm-media-img-container">\n' +
+                            '                                <div class="text-center pt-31 pb-31 tm-timeline-date '+color+'>'+score+'</div>\n' +
+                            '                                <img class="d-flex img-fluid" src="'+imgSrc+'" alt="Generic placeholder image">\n' +
+                            '                            </div>\n' +
+                            '                          \n' +
+                            '                            <div class="media-body tm-flexbox-ie-fix tm-width-ie-fix tm-bg-light-gray">\n' +
+                            '                                <div class="p-5">\n' +
+                            '                                    <h2 class="mb-4 mt-0 tm-blue-text tm-timeline-item-title">'+collegeName+'</h2>\n' +
+                            '                                    <p class="mb-4">\n' +
+                            '                                    '+desc+'\n' +
+                            '                                    </p>\n' +
+                            '                                \n' +
+                            '                                    <a href="'+url+'" class="btn btn-primary tm-button-rounded '+color+' tm-button-no-border tm-button-normal tm-button-timeline" target="_blank">Read More</a>\n' +
+                            '                                </div>                            \n' +
+                            '                            </div>\n' +
+                            '                        </div>\n' +
+                            '                    </div>';
+                            strData+=str;
                     }
                     $(".tm-main-content").html(strData);
                 },
@@ -104,10 +113,10 @@
 
                     <ul class="nav nav-pills justify-content-center" role="tablist">
                         <li class="nav-item" style="width:70px;">
-                            <a class="nav-link active" data-toggle="pill" href=""><text style="font-size:15px;">分数</text></a>
+                            <a class="nav-link active" data-toggle="pill" href="" onclick="scoreText()"><text style="font-size:16px;">分数</text></a>
                         </li>
                         <li class="nav-item" style="width:70px;">
-                            <a class="nav-link" data-toggle="pill" href=""><text style="font-size:15px;">位次</text></a>
+                            <a class="nav-link" data-toggle="pill" href="" onclick="rankText()"><text style="font-size:15px;">位次</text></a>
                         </li>
                     </ul>
 
@@ -139,8 +148,8 @@
 
 
                             <div style="margin-top:15px;">
-                                <text style="font-size:15px;margin-left:-35px;">分数/位次：</text>
-                                <input id="scoreId" type="text" maxlength="8" style="width:150px;height:25px;margin-top:20px;" onkeyup="this.value=this.value.replace(/\D/g,'')">
+                                <text id="textId" style="font-size:16px;margin-left:10px;">分数：</text>
+                                <input id="scoreId" type="text" maxlength="8" style="width:150px;height:25px;margin-top:20px;margin-left:-10px;" onkeyup="this.value=this.value.replace(/\D/g,'')">
                             </div>
 
 

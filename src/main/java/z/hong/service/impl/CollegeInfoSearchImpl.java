@@ -2,6 +2,10 @@ package z.hong.service.impl;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+import z.hong.dao.CollegeMapper;
 import z.hong.po.College;
 import z.hong.service.CollegeInfoSearch;
 
@@ -11,20 +15,21 @@ import java.util.List;
 import java.util.Map;
 
 public class CollegeInfoSearchImpl implements CollegeInfoSearch {
-    private SqlSessionFactory factory;
-    //覆盖掉默认构造函数,这样就有了工厂，可以进一步创建对象
-    public CollegeInfoSearchImpl(SqlSessionFactory factory){
-        this.factory = factory;
+
+    private CollegeMapper collegeMapper;
+
+    public void setCollegeMapper(CollegeMapper collegeMapper) {
+        this.collegeMapper = collegeMapper;
     }
+
     @Override
-    public List<Map<String,Object>> selectCollegeRank() {
-        //1.使用工厂创建SqlSession对象
-        SqlSession sqlSession = factory.openSession();
-        //2.使用sqlSession执行查询所有方法(此处需要的参数:(String statement)从配置文件中获取) namespace + id
-        List<College>  collegeList = sqlSession.selectList("z.hong.service.CollegeInfoSearch.selectCollegeRank");
+    public List<Map<String,Object>> selectCollegeRank(Map<String,Object> map) {
+        //调用dao层，获取数据库信息
+        List<College> collegeList = collegeMapper.selectCollegeRank(map);
         List<Map<String,Object>> rel = new ArrayList<Map<String,Object>>();
-        Map<String,Object> rell = new HashMap<String, Object>();
+        //将college对象转换成map对象
         for (College college : collegeList){
+            Map<String,Object> rell = new HashMap<String, Object>();
             rell.put("college_id",college.getCollege_id());
             rell.put("college_name",college.getCollege_name());
             rell.put("college_location",college.getCollege_location());
@@ -32,12 +37,34 @@ public class CollegeInfoSearchImpl implements CollegeInfoSearch {
             rell.put("art_min_rank",college.getArt_min_rank());
             rell.put("science_min_grade",college.getScience_min_grade());
             rell.put("science_min_rank",college.getScience_min_rank());
-
+            rell.put("desc",college.getDesc());
+            rell.put("url",college.getUrl());
+            rell.put("img",college.getImg());
             rel.add(rell);
-            System.out.println(rel);
         }
-        //使用完后关闭掉
-        sqlSession.close();
+        return rel;
+    }
+
+    @Override
+    public List<Map<String, Object>> selectCollegeGrade(Map<String,Object> map) {
+        //调用dao层，获取数据库信息
+        List<College> collegeList = collegeMapper.selectCollegeGrade(map);
+        List<Map<String,Object>> rel = new ArrayList<Map<String,Object>>();
+        //将college对象转换成map对象
+        for (College college : collegeList){
+            Map<String,Object> rell = new HashMap<String, Object>();
+            rell.put("college_id",college.getCollege_id());
+            rell.put("college_name",college.getCollege_name());
+            rell.put("college_location",college.getCollege_location());
+            rell.put("art_min_grade",college.getArt_min_grade());
+            rell.put("art_min_rank",college.getArt_min_rank());
+            rell.put("science_min_grade",college.getScience_min_grade());
+            rell.put("science_min_rank",college.getScience_min_rank());
+            rell.put("desc",college.getDesc());
+            rell.put("url",college.getUrl());
+            rell.put("img",college.getImg());
+            rel.add(rell);
+        }
         return rel;
     }
 }

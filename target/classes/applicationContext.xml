@@ -16,14 +16,14 @@ xmlns:context="http://www.springframework.org/schema/context"
         http://www.springframework.org/schema/aop/spring-aop.xsd">
 
         <!-- 加载配置文件 -->
-<context:component-scan base-package="z.hong.controller"></context:component-scan>
+<context:component-scan base-package="z.hong"></context:component-scan>
         <!--读取数据源        -->
         <context:property-placeholder location="classpath:db.properties"/>
         <!--配置数据库-->
         <bean id="datasoures"
                 class="org.apache.commons.dbcp.BasicDataSource">
         <!--数据库驱动 -->
-                <property name="driverClassName" value="${jdbc.username}"/>
+                <property name="driverClassName" value="${jdbc.driver}"/>
         <!--连接数据库的url -->
                 <property name="url" value="${jdbc.url}"/>
         <!--连接数据库的用户名 -->
@@ -46,12 +46,19 @@ xmlns:context="http://www.springframework.org/schema/context"
                 <property name="dataSource" ref="datasoures"/>
         </bean>
         <!--配置MyBatis的工厂-->
-        <bean class="org.mybatis.spring.SqlSessionFactoryBean">
-        <!--数据源-->
+        <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+                <!--数据源-->
                 <property name="dataSource" ref="datasoures"/>
-        <!--配置MyBatis的核心配置文件  -->
-        <property name="configLocation"
-                  value="classpath:mybatis-config.xml"/>
+                <!--配置MyBatis的核心配置文件  -->
+                <property name="configLocation" value="classpath:mybatis-config.xml"/>
         </bean>
 
+        <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+                <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+                <property name="basePackage" value="z.hong.dao"/>
+        </bean>
+
+        <bean id="CollegeInfoSearchImpl" class="z.hong.service.impl.CollegeInfoSearchImpl">
+                <property name="collegeMapper" ref="collegeMapper"/>
+        </bean>
 </beans>
