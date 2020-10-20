@@ -16,10 +16,10 @@
             <!--根据文理科的成绩进行查询-->
             <choose>
                 <when test="subject=='文科' and value!=''">
-                    and art_min_rank >= #{value}-5000  and #{value}+5000 >= art_min_rank
+                    and art_min_rank >= #{value}-1000  and #{value}+1000 >= art_min_rank
                 </when>
                 <when test="subject=='理科' and value!=''">
-                    and science_min_rank >= #{value}-5000 and #{value}+5000 >= science_min_rank
+                    and science_min_rank >= #{value}-1000 and #{value}+1000 >= science_min_rank
                 </when>
             </choose>
         </where>
@@ -107,10 +107,10 @@
             <!--根据文理科的成绩进行查询-->
             <choose>
                 <when test="subject=='文科' and value!=''">
-                    and art_min_rank >= #{value}-5000  and #{value}+5000 >= art_min_rank
+                    and art_min_rank >= #{value}-1000  and #{value}+1000 >= art_min_rank
                 </when>
                 <when test="subject=='理科' and value!=''">
-                    and science_min_rank >= #{value}-5000 and #{value}+5000 >= science_min_rank
+                    and science_min_rank >= #{value}-1000 and #{value}+1000 >= science_min_rank
                 </when>
             </choose>
         </where>
