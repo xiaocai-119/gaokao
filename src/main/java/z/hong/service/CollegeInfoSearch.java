@@ -13,4 +13,8 @@ public interface CollegeInfoSearch {
     List<Map<String,Object>> selectCollegeRank(Map<String,Object> map);
     //根据成绩查询学校
     List<Map<String,Object>> selectCollegeGrade(Map<String,Object> map);
+    //根据位次查询全部学校
+    List<Map<String,Object>> selectAllCollegeRank(Map<String,Object> map);
+    //根据成绩查询全部学校
+    List<Map<String,Object>> selectAllCollegeGrade(Map<String,Object> map);
 }

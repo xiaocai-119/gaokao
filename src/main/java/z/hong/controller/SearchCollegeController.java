@@ -53,14 +53,23 @@ public class SearchCollegeController {
         Map<String, Object> map = JSONArray.parseObject(String.valueOf(jsonObject));
         //获取查询方式
         String qyr_type = jsonObject.getString("qyr_type");
-
+        String province = jsonObject.getString("province");
         if (qyr_type.equals("分数")) {
-            colleges = collegeInfoSearch.selectCollegeGrade(map);
+            if(!province.equals("全部")){
+                colleges = collegeInfoSearch.selectCollegeGrade(map);
+            }else{
+                colleges = collegeInfoSearch.selectAllCollegeGrade(map);
+            }
             if(jsonObject.getString("subject").equals("理科")){
                 flag=11;//理科分数标志
             }
         }else{
-            colleges = collegeInfoSearch.selectCollegeRank(map);
+            if(!province.equals("全部")){
+                colleges = collegeInfoSearch.selectCollegeRank(map);
+            }else{
+                colleges = collegeInfoSearch.selectAllCollegeRank(map);
+            }
+
             flag=20;//文科排位标志
             if(jsonObject.getString("subject").equals("理科")){
                 flag=21;//理科排位标志
